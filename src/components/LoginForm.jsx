@@ -1,27 +1,23 @@
 import { useState,useEffect } from "react"
-import SignUpForm from "./SignUpForm.jsx";
+import SignUpForm from "./SignUpForm"
 
 
 function LoginForm(){
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [showSignUp, setShowSignUp] = useState("false");
-
-    useEffect(() => {
-        if(!localStorage.getItem("user")){
-            localStorage.setItem(
-                "user", JSON.stringify({email: "Thisisatest@gmail.com" , password: "Test@1234"})
-            );
-        }
-    },[]);
+    const [showSignUp, setShowSignUp] = useState(false);
 
     const handleLogin = (e) => {
         e.preventDefault();
 
         const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) {
+            alert("No user found. Please sign up first.");
+            return;
+        }
 
-        if(email == user.email && password === user.password){
+        if(email === user.email && password === user.password){
             alert("you are logged in")
         }else{
             alert("Invalid Email or Password")
@@ -72,7 +68,7 @@ function LoginForm(){
                             Sign Up
                         </div>
                     </div>
-                    {showSignUp && <SignUpForm onClose={() => setShowSignUp(false)} />}
+                    
 
                     <div className="flex justify-between text-sm text-gray-400">
                         <label className="flex items-center">
@@ -83,6 +79,7 @@ function LoginForm(){
                         <a href="#" className="hover:text-red-500 transition">Forgot password?</a>
                     </div>
                     </form>
+                    {showSignUp && <SignUpForm onClose={() => setShowSignUp(false)} />}
 
                 </div>
                 </div>
