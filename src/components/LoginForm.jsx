@@ -1,10 +1,12 @@
 import { useState,useEffect } from "react"
+import SignUpForm from "./SignUpForm.jsx";
 
 
 function LoginForm(){
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showSignUp, setShowSignUp] = useState("false");
 
     useEffect(() => {
         if(!localStorage.getItem("user")){
@@ -31,7 +33,7 @@ function LoginForm(){
                 <div className="bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-md w-full border-t-4 border-red-600">
                     <form className="flex flex-col gap-6"
                         onSubmit={handleLogin}>
-                    <h2 className="text-3xl font-bold text-center text-red-500">Admin Login</h2>
+                    <h2 className="text-3xl font-bold text-center text-red-500">Login</h2>
 
                     <input
                         type="email"
@@ -59,6 +61,18 @@ function LoginForm(){
                     > 
                         Login
                     </button>
+                    <div className="flex justify-center -mt-5 ">
+                        <div className="text-gray-300" >
+                            NewUser?
+                        </div>
+                        <div className="text-blue-400 ml-1 cursor-pointer "
+                        onClick={()=>{
+                            setShowSignUp(true);
+                        }}>
+                            Sign Up
+                        </div>
+                    </div>
+                    {showSignUp && <SignUpForm onClose={() => setShowSignUp(false)} />}
 
                     <div className="flex justify-between text-sm text-gray-400">
                         <label className="flex items-center">
@@ -69,6 +83,7 @@ function LoginForm(){
                         <a href="#" className="hover:text-red-500 transition">Forgot password?</a>
                     </div>
                     </form>
+
                 </div>
                 </div>
     )
