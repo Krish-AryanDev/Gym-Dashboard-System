@@ -16,7 +16,7 @@ function SignUpForm({ onClose }) {
         }else{
             if(user && signUpEmail === user.email ){
                 alert("User already exists");
-                onClose();
+                return;
             }else{
                 localStorage.setItem(
                     "user", JSON.stringify({email: signUpEmail, password: signUpPassword})
