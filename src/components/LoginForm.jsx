@@ -1,25 +1,23 @@
 import { useState,useEffect } from "react"
+import SignUpForm from "./SignUpForm"
 
 
 function LoginForm(){
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    useEffect(() => {
-        if(!localStorage.getItem("user")){
-            localStorage.setItem(
-                "user", JSON.stringify({email: "Thisisatest@gmail.com" , password: "Test@1234"})
-            );
-        }
-    },[]);
+    const [showSignUp, setShowSignUp] = useState(false);
 
     const handleLogin = (e) => {
         e.preventDefault();
 
         const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) {
+            alert("No user found. Please sign up first.");
+            return;
+        }
 
-        if(email == user.email && password === user.password){
+        if(email === user.email && password === user.password){
             alert("you are logged in")
         }else{
             alert("Invalid Email or Password")
@@ -31,7 +29,7 @@ function LoginForm(){
                 <div className="bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-md w-full border-t-4 border-red-600">
                     <form className="flex flex-col gap-6"
                         onSubmit={handleLogin}>
-                    <h2 className="text-3xl font-bold text-center text-red-500">Admin Login</h2>
+                    <h2 className="text-3xl font-bold text-center text-red-500">Login</h2>
 
                     <input
                         type="email"
@@ -59,6 +57,18 @@ function LoginForm(){
                     > 
                         Login
                     </button>
+                    <div className="flex justify-center -mt-5 ">
+                        <div className="text-gray-300" >
+                            NewUser?
+                        </div>
+                        <div className="text-blue-400 ml-1 cursor-pointer "
+                        onClick={()=>{
+                            setShowSignUp(true);
+                        }}>
+                            Sign Up
+                        </div>
+                    </div>
+                    
 
                     <div className="flex justify-between text-sm text-gray-400">
                         <label className="flex items-center">
@@ -69,6 +79,8 @@ function LoginForm(){
                         <a href="#" className="hover:text-red-500 transition">Forgot password?</a>
                     </div>
                     </form>
+                    {showSignUp && <SignUpForm onClose={() => setShowSignUp(false)} />}
+
                 </div>
                 </div>
     )
