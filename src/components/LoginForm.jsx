@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react"
-import SignUpForm from "./SignUpForm"
+import SignUpForm from "../components/SignUpForm"
 
 
 function LoginForm(){
