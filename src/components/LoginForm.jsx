@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react"
-import SignUpForm from "./SignUpForm"
+import SignUpForm from "../components/SignUpForm"
 
 
 function LoginForm(){
@@ -53,7 +53,6 @@ function LoginForm(){
                     <button
                         type="submit"
                         className="bg-red-600 text-white p-3 rounded-lg hover:bg-red-700 transition font-semibold"
-                        onClick={handleLogin}
                     > 
                         Login
                     </button>
