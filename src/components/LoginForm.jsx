@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react"
 import SignUpForm from "../components/SignUpForm"
+import { useNavigate } from "react-router-dom";
 
 
 function LoginForm(){
@@ -7,21 +8,26 @@ function LoginForm(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showSignUp, setShowSignUp] = useState(false);
+    const navigate = useNavigate();
 
     const handleLogin = (e) => {
         e.preventDefault();
 
         const user = JSON.parse(localStorage.getItem("user"));
+        
+        
         if (!user) {
             alert("No user found. Please sign up first.");
             return;
         }
 
         if(email === user.email && password === user.password){
-            alert("you are logged in")
+            navigate("/dashboard")
         }else{
             alert("Invalid Email or Password")
         }
+
+       
     }
 
     return(
@@ -29,7 +35,7 @@ function LoginForm(){
                 <div className="bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-md w-full border-t-4 border-red-600">
                     <form className="flex flex-col gap-6"
                         onSubmit={handleLogin}>
-                    <h2 className="text-3xl font-bold text-center text-red-500">Login</h2>
+                    <h2 className="text-3xl font-bold text-center text-red-500">Admin Login</h2>
 
                     <input
                         type="email"
