@@ -37,8 +37,9 @@ function SignUpForm({ onClose }) {
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
         
       <div className="bg-gray-800 p-8 rounded-2xl shadow-2xl w-96 grid gap-4">
-        <h1 className="pl-72 cursor-pointer"
-        onClick={onClose}>X</h1>
+        <div className="pl-72 "
+        ><h1 className ="cursor-pointer text-2xl"onClick={onClose}>x</h1>
+        </div>
         <h2 className="text-2xl font-bold text-center text-red-500">Sign Up</h2> 
         <input
           type="email"
